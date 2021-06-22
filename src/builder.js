@@ -1,4 +1,4 @@
-var harvester = require('harvester')
+var harvestStrategy = require('harvest.strategy')
 var utils = require('util')
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
         }
 
         if(creep.memory.harvesting){
-            harvester.harvest(creep)
+            harvestStrategy.harvest(creep)
         }else{
             this.build(creep)
         }
@@ -27,14 +27,14 @@ module.exports = {
                 creep.moveTo(site)
             }
         }else{
-            harvester.harvest(creep)
+            harvestStrategy.harvest(creep)
         }
     }, 
     bodyParts: [WORK, CARRY, CARRY, CARRY, MOVE],
     spawn: function(spawnName){
         var name = `Builder@${Game.time.toString()}`
         utils.log(`Spawning ${name}`)
-        Game.spawns[spawnName].spawnCreep(this.bodyParts, name, {memory: {role: 'builder', harvesting: true}})
+        Game.spawns[spawnName].spawnCreep(this.bodyParts, name, {memory: {role: 'builder', harvesting: true, harvestStrategy: 'active_source'}})
     },
     canSpawn: function(spawnName){
         return Game.spawns[spawnName].store.getUsedCapacity("energy") >= utils.calculateCreepCost(this.bodyParts)

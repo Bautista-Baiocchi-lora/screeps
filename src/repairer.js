@@ -1,4 +1,5 @@
-var harvester = require('harvester')
+
+var harvestStrategy = require('harvest.strategy')
 var builder = require('builder')
 var utils = require('util')
 
@@ -6,7 +7,6 @@ var utils = require('util')
 
 module.exports = {
     run: function(creep){
-         //go store
          if(creep.memory.harvesting && creep.store[RESOURCE_ENERGY] == creep.store.getCapacity('energy')){
             creep.memory.harvesting = false
             utils.creepLog(creep, `SWITCH TO REPAIR`)
@@ -16,7 +16,7 @@ module.exports = {
         }
 
         if(creep.memory.harvesting){
-            harvester.harvest(creep)
+            harvestStrategy.harvest(creep)
         }else{
             this.repair(creep)
         }
@@ -26,7 +26,6 @@ module.exports = {
 
         var structure = this.getStructure(creep)
 
-        
         if(structure){
             if(structure.hits > structure.hitsMax * 0.9){
                 utils.creepLog(creep, "Finished repairing.")
@@ -50,7 +49,7 @@ module.exports = {
     spawn: function(spawnName){
         var name = `Repairer@${Game.time.toString()}`
         utils.log(`Spawning ${name}`)
-        Game.spawns[spawnName].spawnCreep(this.bodyParts, name, {memory: {role: 'repairer', harvesting: true}})
+        Game.spawns[spawnName].spawnCreep(this.bodyParts, name, {memory: {role: 'repairer', harvesting: true, harvestStrategy: 'active_source'}})
     },
     canSpawn: function(spawnName){
         return Game.spawns[spawnName].store.getUsedCapacity("energy") >= utils.calculateCreepCost(this.bodyParts)
