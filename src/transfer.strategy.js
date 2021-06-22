@@ -4,6 +4,9 @@ module.exports = {
         creep.say("transfer")
 
         switch(creep.memory.transferStrategy){
+            case 'extension':
+                this.toExtension(creep)
+                break;
             case "controller":
             default:
                 this.toController(creep)
@@ -20,6 +23,14 @@ module.exports = {
         }
     },
     toExtension: function(creep){
+        creep.say("transfer")
+        var extension = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
+            filter: s => s.structureType == STRUCTURE_EXTENSION && s.store.getFreeCapacity('energy') > 0
+        })
 
+        if(creep.transfer(extension, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE){
+            creep.say("Go to ext.")
+            creep.moveTo(extension)
+        }
     }
 }

@@ -26,6 +26,6 @@ module.exports = {
         Game.spawns[spawnName].spawnCreep(this.bodyParts, name, {memory: {role: 'harvester', harvesting: true, harvestStrategy: 'active_source', transferStrategy: 'controller'}})
     },
     canSpawn: function(spawnName){
-        return Game.spawns[spawnName].store.getUsedCapacity("energy") >= utils.calculateCreepCost(this.bodyParts)
+        return Game.spawns[spawnName].room.energyAvailable >= utils.calculateCreepCost(this.bodyParts)
     }
 }
