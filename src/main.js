@@ -24,21 +24,27 @@ module.exports.loop = function() {
         utils.log("Create state")
         Memory.state = {
             roomTerrain: [],
-            repairQueue: []
+            repairQueue: [],
+            activeRepairQueue: [],
+            constructionQueue: [],
         }
     }
 
+    var roomName = 'W48S51'
+    var spawnName = 'Spawn1'
 
     if(Memory.state.roomTerrain.length == 0){
         console.log("Cache room terrain")
-        Memory.state.roomTerrain = Game.map.getRoomTerrain('W48S51').getRawBuffer();
+        Memory.state.roomTerrain = Game.map.getRoomTerrain(roomName).getRawBuffer();
     }
 
     if(repairManager.shouldScan()){
-       repairManager.scan()
+       repairManager.scan(roomName)
     }
 
-    spawnManager.handle()
+    if(spawnManager.shouldRun()){
+        spawnManager.run(spawnName)
+    }
 
     for(var name in Game.creeps){
 
