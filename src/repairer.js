@@ -49,7 +49,7 @@ module.exports = {
             builder.run(creep)
         }
     },
-    bodyParts: [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
+    bodyParts: [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
     spawn: function (spawnName) {
         var name = `Repairer@${Game.time.toString()}`
         utils.log(`Spawning ${name} (${utils.calculateCreepCost(this.bodyParts)})`)

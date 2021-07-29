@@ -5,20 +5,20 @@ var repairer = require('repairer')
 
 
 var lastRun = Game.time
-var rate = 25 
+var rate = 35 
 
 var spawnConfig = {
     'harvester': {
         min: 3,
-        max: 5
+        max: 4
     },
     'builder': {
         min: 0,
-        max: 1
+        max: 0
     },
     'repairer': {
         min: 1,
-        max: 3
+        max: 2
     }
 }
 

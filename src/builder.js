@@ -30,7 +30,7 @@ module.exports = {
             harvestStrategy.harvest(creep)
         }
     },
-    bodyParts: [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE],
+    bodyParts: [WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE],
     spawn: function (spawnName) {
         var name = `Builder@${Game.time.toString()}`
         utils.log(`Spawning ${name} (${utils.calculateCreepCost(this.bodyParts)})`)
